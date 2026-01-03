@@ -1,10 +1,30 @@
-// list node
-// has value
-// next node
+#include "linked_list.h"
 
-// list struct
-// has head
-// size node #
+// node
+Node::Node(int value, Node* next)
+	: value(value), next(next)
+{
+}
+
+// list constructor
+LinkedList::LinkedList()
+	: head(nullptr), size(0)
+{
+}
+
+// list destructor
+LinkedList::~LinkedList()
+{
+
+	Node* current = head;
+	while (current != nullptr)
+	{
+		Node* next = current->next;
+		delete current;
+		current = next;
+	}
+}
+
 
 // init function
 // define head
@@ -48,3 +68,4 @@
 // clear
 // size
 // traverse
+// deep copy?
