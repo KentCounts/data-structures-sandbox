@@ -26,6 +26,10 @@ public:
 	LinkedList(const LinkedList&) = delete;
 	LinkedList& operator=(const LinkedList&) = delete;
 
+	void print() const;
+
+	void init();
+
 private:
 	Node* head;
 	std::size_t size;
