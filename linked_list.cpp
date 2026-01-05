@@ -31,7 +31,7 @@ LinkedList::~LinkedList()
 // init function
 // define head
 // define size
-// builds basic filled list
+// builds basic filled list for testing
 void LinkedList::init()
 {
     Node* current = head;
@@ -77,6 +77,10 @@ void LinkedList::print() const
 
 // is empty?
 // head null
+bool LinkedList::isEmpty() const
+{
+    return head == nullptr; 
+}
 
 // push front
 // new node

@@ -20,6 +20,7 @@ void show_linked_list_menu()
     std::cout << "\n--- Linked List Menu ---\n";
     std::cout << "1. Initialize list\n";
     std::cout << "2. Print list\n";
+    std::cout << "3. Is list empty?\n";
     std::cout << "9. Main Menu\n";
     std::cout << "0. Exit\n";
     std::cout << "Choice: ";
@@ -44,6 +45,17 @@ bool linked_list_menu(LinkedList& list)
         case 2:
             list.print();
             break;
+
+        case 3:
+            if (list.isEmpty())
+            {
+                std::cout << "The list is empty.\n";
+            }
+
+            else
+            {
+                std::cout << "The list is NOT empty. \n";
+            }
 
         case 9:
             return true;  // Return to main menu

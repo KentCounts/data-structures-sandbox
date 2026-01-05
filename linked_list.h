@@ -30,6 +30,8 @@ public:
 
 	void init();
 
+	bool isEmpty() const;
+
 private:
 	Node* head;
 	std::size_t size;
