@@ -32,6 +32,8 @@ public:
 
 	bool isEmpty() const;
 
+	void clear();
+
 private:
 	Node* head;
 	std::size_t size;

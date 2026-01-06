@@ -17,14 +17,7 @@ LinkedList::LinkedList()
 // list destructor
 LinkedList::~LinkedList()
 {
-
-	Node* current = head;
-	while (current != nullptr)
-	{
-		Node* next = current->next;
-		delete current;
-		current = next;
-	}
+    clear();
 }
 
 
@@ -82,6 +75,21 @@ bool LinkedList::isEmpty() const
     return head == nullptr; 
 }
 
+// clear
+void LinkedList::clear()
+{
+    Node* current = head;
+    while (current != nullptr)
+    {
+        Node* next = current->next;
+        delete current;
+        current = next;
+    }
+
+    head = nullptr;
+    size = 0;
+}
+
 // push front
 // new node
 // new head
@@ -114,7 +122,6 @@ bool LinkedList::isEmpty() const
 // search
 // insert
 // remove
-// clear
 // size
 // traverse
 // deep copy?
