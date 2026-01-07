@@ -27,22 +27,12 @@ LinkedList::~LinkedList()
 // builds basic filled list for testing
 void LinkedList::init()
 {
-    Node* current = head;
-    while (current != nullptr)
-    {
-        Node* next = current->next;
-        delete current;
-        current = next;
-    }
-
-    head = nullptr;
-    size = 0;
+    clear();
 
     // Build list: 1 2 3 4 5 
     for (int i = 5; i >= 1; --i)
     {
-        head = new Node(i, head);
-        ++size;
+        PushBack(i);
     }
 }
 
@@ -95,6 +85,13 @@ void LinkedList::clear()
 // new head
 // link new head to old head
 // size +1
+void LinkedList::PushFront(int value)
+{
+    Node* newNode = new Node(value, head);
+    head = newNode;
+    size++;
+}
+
 
 // push back
 // new node
@@ -102,6 +99,30 @@ void LinkedList::clear()
 // if else for head
 // define next 
 // size +1
+void LinkedList::PushBack(int value)
+{
+    Node* newNode = new Node(value, nullptr);
+
+    if (head == nullptr)
+    {
+        head = newNode;
+    }
+
+    else
+    {
+        Node* current = head;
+
+        while (current->next != nullptr)
+        {
+            current = current->next;
+        }
+
+        current->next = newNode;
+    }
+
+    size++;
+}
+
 
 // pop front
 // if empty

@@ -34,6 +34,9 @@ public:
 
 	void clear();
 
+	void PushFront(int value);
+	void PushBack(int value);
+
 private:
 	Node* head;
 	std::size_t size;
