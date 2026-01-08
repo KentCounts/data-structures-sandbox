@@ -24,6 +24,8 @@ void show_linked_list_menu()
     std::cout << "4. Clear list\n";
     std::cout << "5. Push Front\n";
     std::cout << "6. Push Back\n";
+    std::cout << "7. Pop front\n";
+    std::cout << "8. Pop back\n";
     std::cout << "9. Main Menu\n";
     std::cout << "0. Exit\n";
     std::cout << "Choice: ";
@@ -80,6 +82,14 @@ bool linked_list_menu(LinkedList& list)
             std::cin >> value;
             list.PushBack(value);
             std::cout << "Value pushed to back.\n";
+            break;
+
+        case 7:
+            list.PopFront();
+            break;
+
+        case 8:
+            list.PopBack();
             break;
 
         case 9:

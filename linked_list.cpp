@@ -129,12 +129,59 @@ void LinkedList::PushBack(int value)
 // remove head
 // new head = next
 // size -1
+void LinkedList::PopFront()
+{
+    if (head == nullptr)
+    {
+        std::cout << "List is empty. Cannot pop front.\n";
+        return;
+    }
+
+    Node* removed = head;
+    head = head->next;
+    delete removed;
+    size--;
+
+    std::cout << "Front element removed.\n";
+}
 
 // pop back
 // if empty
 // if singular
 // remove last
 // size -1
+void LinkedList::PopBack()
+{
+    if (head == nullptr)
+    {
+        std::cout << "List is empty. Cannot pop back.\n";
+        return;
+    }
+
+    if (head->next == nullptr)
+    {
+        delete head;
+        head = nullptr;
+    }
+    else
+    {
+        Node* current = head;
+        Node* prev = nullptr;
+
+        while (current->next != nullptr)
+        {
+            prev = current;
+            current = current->next;
+        }
+
+        prev->next = nullptr;
+        delete current;
+    }
+
+    size--;
+    std::cout << "Back element removed.\n";
+}
+
 
 
 

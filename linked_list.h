@@ -37,6 +37,9 @@ public:
 	void PushFront(int value);
 	void PushBack(int value);
 
+	void PopFront();
+	void PopBack();
+
 private:
 	Node* head;
 	std::size_t size;
