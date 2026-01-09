@@ -40,6 +40,8 @@ public:
 	void PopFront();
 	void PopBack();
 
+	std::size_t GetSize() const;
+
 private:
 	Node* head;
 	std::size_t size;

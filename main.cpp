@@ -26,8 +26,8 @@ void show_linked_list_menu()
     std::cout << "6. Push Back\n";
     std::cout << "7. Pop front\n";
     std::cout << "8. Pop back\n";
-    std::cout << "9. Main Menu\n";
-    std::cout << "0. Exit\n";
+    std::cout << "9. Get list size\n";
+    std::cout << "0. Main Menu\n";
     std::cout << "Choice: ";
 }
 
@@ -93,10 +93,11 @@ bool linked_list_menu(LinkedList& list)
             break;
 
         case 9:
-            return true;  // Return to main menu
+            std::cout << "List size: " << list.GetSize() << "\n";
+            break;
 
         case 0:
-            return false; // Exit program
+            return true; // return to main menu
 
         default:
             std::cout << "Invalid choice.\n";

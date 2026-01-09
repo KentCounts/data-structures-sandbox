@@ -182,14 +182,18 @@ void LinkedList::PopBack()
     std::cout << "Back element removed.\n";
 }
 
+// get size
+std::size_t LinkedList::GetSize() const
+{
+    return size;
+}
+
 
 
 
 // other ideas
-
 // search
 // insert
 // remove
-// size
 // traverse
 // deep copy?
