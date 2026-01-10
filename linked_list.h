@@ -42,6 +42,8 @@ public:
 
 	std::size_t GetSize() const;
 
+	bool InsertAt(std::size_t index, int value);
+
 private:
 	Node* head;
 	std::size_t size;

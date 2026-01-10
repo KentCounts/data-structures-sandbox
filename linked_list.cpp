@@ -189,11 +189,43 @@ std::size_t LinkedList::GetSize() const
 }
 
 
+// insert
+bool LinkedList::InsertAt(std::size_t index, int value)
+{
+    if (index > size)
+    {
+        // out of range
+        return false;
+    }
 
+    if (index == 0)
+    {
+        PushFront(value);
+        return true;
+    }
+
+    if (index == size)
+    {
+        PushBack(value);
+        return true;
+    }
+
+    // the node just before the insertion point
+    Node* prev = head;
+    for (std::size_t i = 0; i < index - 1; ++i)
+    {
+        prev = prev->next;
+    }
+
+    Node* newNode = new Node(value, prev->next);
+    prev->next = newNode;
+    size++;
+
+    return true;
+}
 
 // other ideas
 // search
-// insert
 // remove
 // traverse
 // deep copy?

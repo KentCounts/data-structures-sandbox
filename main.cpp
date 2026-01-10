@@ -27,6 +27,7 @@ void show_linked_list_menu()
     std::cout << "7. Pop front\n";
     std::cout << "8. Pop back\n";
     std::cout << "9. Get list size\n";
+    std::cout << "10. Insert at index\n";
     std::cout << "0. Main Menu\n";
     std::cout << "Choice: ";
 }
@@ -95,6 +96,28 @@ bool linked_list_menu(LinkedList& list)
         case 9:
             std::cout << "List size: " << list.GetSize() << "\n";
             break;
+
+        case 10:
+        {
+            std::size_t index;
+            int value;
+
+            std::cout << "Enter index (0 to " << list.GetSize() << "): ";
+            std::cin >> index;
+
+            std::cout << "Enter value: ";
+            std::cin >> value;
+
+            if (list.InsertAt(index, value))
+            {
+                std::cout << "Inserted " << value << " at index " << index << ".\n";
+            }
+            else
+            {
+                std::cout << "Invalid index. No insertion performed.\n";
+            }
+            break;
+        }
 
         case 0:
             return true; // return to main menu
