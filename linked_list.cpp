@@ -224,8 +224,41 @@ bool LinkedList::InsertAt(std::size_t index, int value)
     return true;
 }
 
+// remove index
+bool LinkedList::RemoveAt(std::size_t index)
+{
+    if (index >= size)
+    {
+        // out of range check
+        return false;
+    }
+
+    // Removing head
+    if (index == 0)
+    {
+        Node* removed = head;
+        head = head->next;
+        delete removed;
+        --size;
+        return true;
+    }
+
+    // Walk to the node before the one removed and prevent gaps in list
+    Node* prev = head;
+    for (std::size_t i = 0; i < index - 1; ++i)
+    {
+        prev = prev->next;
+    }
+
+    Node* removed = prev->next;
+    prev->next = removed->next;
+    delete removed;
+    size--;
+
+    return true;
+}
+
 // other ideas
 // search
-// remove
 // traverse
 // deep copy?

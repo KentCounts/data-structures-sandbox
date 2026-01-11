@@ -43,6 +43,7 @@ public:
 	std::size_t GetSize() const;
 
 	bool InsertAt(std::size_t index, int value);
+	bool RemoveAt(std::size_t index);
 
 private:
 	Node* head;

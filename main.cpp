@@ -28,6 +28,7 @@ void show_linked_list_menu()
     std::cout << "8. Pop back\n";
     std::cout << "9. Get list size\n";
     std::cout << "10. Insert at index\n";
+    std::cout << "11. Remove at Index\n";
     std::cout << "0. Main Menu\n";
     std::cout << "Choice: ";
 }
@@ -119,8 +120,34 @@ bool linked_list_menu(LinkedList& list)
             break;
         }
 
+        case 11:
+        {
+            std::size_t index;
+
+            if (list.GetSize() == 0)
+            {
+                std::cout << "List is empty. Nothing to remove.\n";
+                break;
+            }
+
+            std::cout << "Enter index (0 to " << (list.GetSize() - 1) << "): ";
+            std::cin >> index;
+
+            if (list.RemoveAt(index))
+            {
+                std::cout << "Removed node at index " << index << ".\n";
+            }
+            else
+            {
+                std::cout << "Invalid index. No removal performed.\n";
+            }
+
+            break;
+        }
+
         case 0:
-            return true; // return to main menu
+            // return to main menu
+            return true;
 
         default:
             std::cout << "Invalid choice.\n";
