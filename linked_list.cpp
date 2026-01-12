@@ -258,7 +258,22 @@ bool LinkedList::RemoveAt(std::size_t index)
     return true;
 }
 
-// other ideas
 // search
-// traverse
+bool LinkedList::search(int value) const
+{
+    Node* current = head;
+
+    while (current != nullptr)
+    {
+        if (current->value == value)
+        {
+            return true;
+        }
+        current = current->next;
+    }
+
+    return false;
+}
+
+// other ideas
 // deep copy?

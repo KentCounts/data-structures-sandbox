@@ -45,6 +45,8 @@ public:
 	bool InsertAt(std::size_t index, int value);
 	bool RemoveAt(std::size_t index);
 
+	bool search(int value) const;
+
 private:
 	Node* head;
 	std::size_t size;

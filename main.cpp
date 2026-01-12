@@ -29,6 +29,7 @@ void show_linked_list_menu()
     std::cout << "9. Get list size\n";
     std::cout << "10. Insert at index\n";
     std::cout << "11. Remove at Index\n";
+    std::cout << "12. Search for value\n";
     std::cout << "0. Main Menu\n";
     std::cout << "Choice: ";
 }
@@ -142,6 +143,23 @@ bool linked_list_menu(LinkedList& list)
                 std::cout << "Invalid index. No removal performed.\n";
             }
 
+            break;
+        }
+
+        case 12:
+        {
+            int value;
+            std::cout << "Enter value to search for: ";
+            std::cin >> value;
+
+            if (list.search(value))
+            {
+                std::cout << "Value " << value << " found in list.\n";
+            }
+            else
+            {
+                std::cout << "Value " << value << " NOT found in list.\n";
+            }
             break;
         }
 
