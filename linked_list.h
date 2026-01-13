@@ -46,6 +46,7 @@ public:
 	bool RemoveAt(std::size_t index);
 
 	bool search(int value) const;
+	int Index(int value) const;
 
 private:
 	Node* head;

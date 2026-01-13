@@ -152,14 +152,17 @@ bool linked_list_menu(LinkedList& list)
             std::cout << "Enter value to search for: ";
             std::cin >> value;
 
-            if (list.search(value))
+            int index = list.Index(value);
+
+            if (index != -1)
             {
-                std::cout << "Value " << value << " found in list.\n";
+                std::cout << "Value " << value << " found at index " << index << ".\n";
             }
             else
             {
                 std::cout << "Value " << value << " NOT found in list.\n";
             }
+
             break;
         }
 

@@ -261,18 +261,28 @@ bool LinkedList::RemoveAt(std::size_t index)
 // search
 bool LinkedList::search(int value) const
 {
+    return Index(value) != -1;
+}
+
+// index num finder for search
+int LinkedList::Index(int value) const
+{
     Node* current = head;
+    int index = 0;
 
     while (current != nullptr)
     {
         if (current->value == value)
         {
-            return true;
+            return index;
         }
+
         current = current->next;
+        ++index;
     }
 
-    return false;
+    // index not found
+    return -1;
 }
 
 // other ideas
