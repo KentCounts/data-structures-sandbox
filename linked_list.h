@@ -22,9 +22,9 @@ public:
 	// Destructor
 	~LinkedList();
 
-	// disable shallow copy
-	LinkedList(const LinkedList&) = delete;
-	LinkedList& operator=(const LinkedList&) = delete;
+	// hjelpers for deep copy
+	LinkedList(const LinkedList& other);
+	LinkedList& operator=(const LinkedList& other);
 
 	void print() const;
 

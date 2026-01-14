@@ -285,5 +285,34 @@ int LinkedList::Index(int value) const
     return -1;
 }
 
-// other ideas
 // deep copy?
+LinkedList::LinkedList(const LinkedList& other)
+    : head(nullptr), size(0)
+{
+    Node* current = other.head;
+    while (current != nullptr)
+    {
+        PushBack(current->value);
+        current = current->next;
+    }
+}
+
+// copy assignment
+LinkedList& LinkedList::operator=(const LinkedList& other)
+{
+    if (this == &other)
+    {
+        return *this;
+    }
+
+    clear();
+
+    Node* current = other.head;
+    while (current != nullptr)
+    {
+        PushBack(current->value);
+        current = current->next;
+    }
+
+    return *this;
+}

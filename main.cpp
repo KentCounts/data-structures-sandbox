@@ -30,6 +30,7 @@ void show_linked_list_menu()
     std::cout << "10. Insert at index\n";
     std::cout << "11. Remove at Index\n";
     std::cout << "12. Search for value\n";
+    std::cout << "13. Deep copy\n";
     std::cout << "0. Main Menu\n";
     std::cout << "Choice: ";
 }
@@ -162,6 +163,45 @@ bool linked_list_menu(LinkedList& list)
             {
                 std::cout << "Value " << value << " NOT found in list.\n";
             }
+
+            break;
+        }
+
+        case 13:
+        {
+            std::cout << "Original: ";
+            list.print();
+
+            std::cout << "Copy constructing a new list from original...\n";
+            LinkedList copyConstructed(list);
+
+            std::cout << "CopyConstructed: ";
+            copyConstructed.print();
+
+            std::cout << "Mutating original (PushBack 99)...\n";
+            list.PushBack(99);
+
+            std::cout << "Original: ";
+            list.print();
+
+            std::cout << "CopyConstructed (should be unchanged): ";
+            copyConstructed.print();
+
+            std::cout << "Testing copy assignment...\n";
+            LinkedList assigned;
+            assigned = list;
+
+            std::cout << "Assigned: ";
+            assigned.print();
+
+            std::cout << "Clearing original...\n";
+            list.clear();
+
+            std::cout << "Original: ";
+            list.print();
+
+            std::cout << "Assigned (should still contain previous values): ";
+            assigned.print();
 
             break;
         }
