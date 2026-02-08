@@ -1,16 +1,18 @@
 #include <iostream>
 #include "linked_list.h"
+#include "stack_queue.h"
 
 void show_main_menu()
 {
     std::cout << "\n=== Main Menu ===\n";
     std::cout << "1. Linked List\n";
-    std::cout << "2. Stack and Queue\n";
-    std::cout << "3. Binary Search\n";
-    std::cout << "4. Hash Table\n";
-    std::cout << "5. Tree\n";
-    std::cout << "6. Quick Sort\n";
-    std::cout << "7. Merge Sort\n";
+    std::cout << "2. Stack\n";
+    std::cout << "3. Queue\n";
+    std::cout << "4. Binary Search\n";
+    std::cout << "5. Hash Table\n";
+    std::cout << "6. Tree\n";
+    std::cout << "7. Quick Sort\n";
+    std::cout << "8. Merge Sort\n";
     std::cout << "0. Exit\n";
     std::cout << "Choice: ";
 }
@@ -31,6 +33,20 @@ void show_linked_list_menu()
     std::cout << "11. Remove at Index\n";
     std::cout << "12. Search for value\n";
     std::cout << "13. Deep copy\n";
+    std::cout << "0. Main Menu\n";
+    std::cout << "Choice: ";
+}
+
+void show_stack_menu()
+{
+    std::cout << "\n--- Stack Menu ---\n";
+    std::cout << "1. Initialize stack\n";
+    std::cout << "2. Print stack\n";
+    std::cout << "3. Is stack empty?\n";
+    std::cout << "4. Clear stack\n";
+    std::cout << "5. Push\n";
+    std::cout << "6. Pop\n";
+    std::cout << "7. Peek\n";
     std::cout << "0. Main Menu\n";
     std::cout << "Choice: ";
 }
@@ -217,9 +233,102 @@ bool linked_list_menu(LinkedList& list)
     }
 }
 
+
+bool stack_menu(Stack& stack)
+{
+    int choice = -1;
+
+    while (true)
+    {
+        show_stack_menu();
+        std::cin >> choice;
+
+        switch (choice)
+        {
+        case 1:
+            stack.Clear();
+
+            stack.Push(10);
+            stack.Push(20);
+            stack.Push(30);
+            stack.Push(40);
+            stack.Push(50);
+
+            std::cout << "Stack initialized with sample data.\n";
+            break;
+
+        case 2:
+        {
+            if (stack.IsEmpty())
+            {
+                std::cout << "(empty)\n";
+                break;
+            }
+
+            Stack copy = stack; // deep copy
+            std::cout << "Top -> ";
+
+            int v = 0;
+            while (copy.Peek(v))
+            {
+                std::cout << v << " ";
+                copy.Pop();
+            }
+
+            std::cout << "<- Bottom\n";
+            break;
+        }
+
+        case 3:
+            std::cout << (stack.IsEmpty() ? "Stack is empty.\n" : "Stack is NOT empty.\n");
+            break;
+
+        case 4:
+            stack.Clear();
+            std::cout << "Stack cleared.\n";
+            break;
+
+        case 5:
+        {
+            int value;
+            std::cout << "Enter value to push: ";
+            std::cin >> value;
+            stack.Push(value);
+            std::cout << "Pushed.\n";
+            break;
+        }
+
+        case 6:
+            if (!stack.Pop())
+                std::cout << "Stack is empty. Nothing to pop.\n";
+            else
+                std::cout << "Popped.\n";
+            break;
+
+        case 7:
+        {
+            int topVal;
+            if (stack.Peek(topVal))
+                std::cout << "Top: " << topVal << "\n";
+            else
+                std::cout << "Stack is empty.\n";
+            break;
+        }
+
+        case 0:
+            return true;
+
+        default:
+            std::cout << "Invalid choice.\n";
+            break;
+        }
+    }
+}
+
 int main()
 {
     LinkedList list;
+    Stack stack;
     int choice = -1;
     bool running = true;
 
@@ -235,6 +344,8 @@ int main()
             break;
 
         case 2:
+            running = stack_menu(stack);
+            break;
 
         case 3:
 
