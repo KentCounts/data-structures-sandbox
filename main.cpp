@@ -51,6 +51,20 @@ void show_stack_menu()
     std::cout << "Choice: ";
 }
 
+void show_queue_menu()
+{
+    std::cout << "\n--- Queue Menu ---\n";
+    std::cout << "1. Initialize queue\n";
+    std::cout << "2. Print queue\n";
+    std::cout << "3. Is queue empty?\n";
+    std::cout << "4. Clear queue\n";
+    std::cout << "5. Enqueue\n";
+    std::cout << "6. Dequeue\n";
+    std::cout << "7. Peek front\n";
+    std::cout << "0. Back\n";
+    std::cout << "Choice: ";
+}
+
 bool linked_list_menu(LinkedList& list)
 {
     int choice = -1;
@@ -233,7 +247,6 @@ bool linked_list_menu(LinkedList& list)
     }
 }
 
-
 bool stack_menu(Stack& stack)
 {
     int choice = -1;
@@ -325,10 +338,103 @@ bool stack_menu(Stack& stack)
     }
 }
 
+bool queue_menu(Queue& queue)
+{
+    int choice = -1;
+
+    while (true)
+    {
+        show_queue_menu();
+        std::cin >> choice;
+
+        switch (choice)
+        {
+        case 1:
+            queue.Clear();
+
+            // Example queue data (front -> back: 10 20 30 40 50)
+            queue.Enqueue(10);
+            queue.Enqueue(20);
+            queue.Enqueue(30);
+            queue.Enqueue(40);
+            queue.Enqueue(50);
+
+            std::cout << "Queue initialized with sample data.\n";
+            break;
+
+        case 2:
+        {
+            if (queue.IsEmpty())
+            {
+                std::cout << "(empty)\n";
+                break;
+            }
+
+            Queue copy = queue; // deep copy, so original remains unchanged
+            std::cout << "Front -> ";
+
+            int v = 0;
+            while (copy.PeekFront(v))
+            {
+                std::cout << v << " ";
+                copy.Dequeue();
+            }
+
+            std::cout << "<- Back\n";
+            break;
+        }
+
+        case 3:
+            std::cout << (queue.IsEmpty() ? "Queue is empty.\n" : "Queue is NOT empty.\n");
+            break;
+
+        case 4:
+            queue.Clear();
+            std::cout << "Queue cleared.\n";
+            break;
+
+        case 5:
+        {
+            int value;
+            std::cout << "Enter value to enqueue: ";
+            std::cin >> value;
+            queue.Enqueue(value);
+            std::cout << "Enqueued.\n";
+            break;
+        }
+
+        case 6:
+            if (!queue.Dequeue())
+                std::cout << "Queue is empty. Nothing to dequeue.\n";
+            else
+                std::cout << "Dequeued.\n";
+            break;
+
+        case 7:
+        {
+            int frontVal;
+            if (queue.PeekFront(frontVal))
+                std::cout << "Front: " << frontVal << "\n";
+            else
+                std::cout << "Queue is empty.\n";
+            break;
+        }
+
+        case 0:
+            return true;
+
+        default:
+            std::cout << "Invalid choice.\n";
+            break;
+        }
+    }
+}
+
 int main()
 {
     LinkedList list;
     Stack stack;
+    Queue queue;
     int choice = -1;
     bool running = true;
 
@@ -348,6 +454,8 @@ int main()
             break;
 
         case 3:
+            running = queue_menu(queue);
+            break;
 
         case 4:
 

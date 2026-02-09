@@ -127,12 +127,111 @@ void Stack::Clear()
 
 
 
-// queue ideas
+// queue
 // Q means = first in first out
 
-// add to back
-// pop from front (edge case empty)
-// peek front (edge case empty)
-// empty
-// size
-// clear
+Queue::Queue()
+    : front(nullptr), back(nullptr), size(0)
+{
+}
+
+Queue::Queue(const Queue& other)
+    : front(nullptr), back(nullptr), size(0)
+{
+    for (Node* cur = other.front; cur != nullptr; cur = cur->next)
+    {
+        Enqueue(cur->data);
+    }
+}
+
+Queue& Queue::operator=(const Queue& other)
+{
+    if (this == &other)
+        return *this;
+
+    Clear();
+
+    for (Node* cur = other.front; cur != nullptr; cur = cur->next)
+    {
+        Enqueue(cur->data);
+    }
+
+    return *this;
+}
+
+Queue::~Queue()
+{
+    Clear();
+}
+
+void Queue::Enqueue(int value)
+{
+    Node* n = new Node;
+    n->data = value;
+    n->next = nullptr;
+
+    if (IsEmpty())
+    {
+        front = back = n;
+    }
+    else
+    {
+        back->next = n;
+        back = n;
+    }
+
+    ++size;
+}
+
+bool Queue::Dequeue()
+{
+    if (IsEmpty())
+    {
+        return false;
+    }
+
+    Node* doomed = front;
+    front = front->next;
+    delete doomed;
+
+    --size;
+
+    if (front == nullptr)
+    {
+        back = nullptr;
+    }
+
+    return true;
+}
+
+bool Queue::PeekFront(int& out) const
+{
+    if (IsEmpty())
+        return false;
+
+    out = front->data;
+    return true;
+}
+
+bool Queue::IsEmpty() const
+{
+    return front == nullptr;
+}
+
+std::size_t Queue::GetSize() const
+{
+    return size;
+}
+
+void Queue::Clear()
+{
+    while (front != nullptr)
+    {
+        Node* doomed = front;
+        front = front->next;
+        delete doomed;
+    }
+
+    back = nullptr;
+    size = 0;
+}
