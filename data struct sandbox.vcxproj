@@ -134,6 +134,7 @@
   <ItemGroup>
     <ClCompile Include="linked_list.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="stack_queue.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
