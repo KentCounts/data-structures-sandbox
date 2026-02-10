@@ -34,3 +34,5 @@
 // is tree empty
 // get tree size
 // initialize with sample data
+
+// small change for new commit since I fucked up tree.h into the wrong branch
