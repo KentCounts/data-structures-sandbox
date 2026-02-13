@@ -5,34 +5,40 @@
 Tree::Node::Node(int value)
     : data(value), left(nullptr), right(nullptr)
 {
-    // no logic yet
+    // Literally just pointers
 }
 
 // Tree Constructors / Destructor
 Tree::Tree()
     : root(nullptr), size(0)
 {
-    // no logic yet
+    // just a root pointer and a 0 size
 }
 
 Tree::Tree(const Tree& other)
     : root(nullptr), size(0)
 {
-    // no logic yet
+    // Copy a tree into another tree
+    root = copy(other.root);
+    size = other.size;
 }
 
 Tree& Tree::operator=(const Tree& other)
 {
     if (this != &other)
     {
-        // no logic yet
+        Clear();
+
+        // Deep copy
+        root = copy(other.root);
+        size = other.size;
     }
     return *this;
 }
 
 Tree::~Tree()
 {
-    // no logic yet
+    Clear();
 }
 
 // Private Recursive Helpers
