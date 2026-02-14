@@ -83,7 +83,13 @@ void Tree::postorder(Node* node) const
 
 void Tree::clear(Node* node)
 {
-    // no logic yet
+    if (node == nullptr)
+        return;
+
+    clear(node->left);
+    clear(node->right);
+
+    delete node;
 }
 
 Tree::Node* Tree::copy(Node* node)
@@ -135,22 +141,30 @@ void Tree::PrintLevelOrder() const
 // Other Helpers
 bool Tree::IsEmpty() const
 {
-    // no logic yet
-    return false;
+    return root == nullptr;
 }
 
 std::size_t Tree::GetSize() const
 {
-    // no logic yet
-    return 0;
+    return size;
 }
 
 void Tree::Clear()
 {
-    // no logic yet
+    clear(root);
+    root = nullptr;
+    size = 0;
 }
 
 void Tree::InitSample()
 {
-    // no logic yet
+    Clear();
+
+    Insert(50);
+    Insert(30);
+    Insert(70);
+    Insert(20);
+    Insert(40);
+    Insert(60);
+    Insert(80);
 }
