@@ -1,5 +1,7 @@
 #include "tree.h"
 #include <iostream>
+#include <queue>
+
 
 // Node Constructor
 Tree::Node::Node(int value)
@@ -120,22 +122,45 @@ bool Tree::Contains(int value) const
 // Printing
 void Tree::PrintInOrder() const
 {
-    // no logic yet
+    inorder(root);
+    std::cout << "\n";
 }
 
 void Tree::PrintPreOrder() const
 {
-    // no logic yet
+    preorder(root);
+    std::cout << "\n";
 }
 
 void Tree::PrintPostOrder() const
 {
-    // no logic yet
+    postorder(root);
+    std::cout << "\n";
 }
 
 void Tree::PrintLevelOrder() const
 {
-    // no logic yet
+    if (root == nullptr)
+        return;
+
+    std::queue<Node*> q;
+    q.push(root);
+
+    while (!q.empty())
+    {
+        Node* current = q.front();
+        q.pop();
+
+        std::cout << current->data << " ";
+
+        if (current->left != nullptr)
+            q.push(current->left);
+
+        if (current->right != nullptr)
+            q.push(current->right);
+    }
+
+    std::cout << "\n";
 }
 
 // Other Helpers
