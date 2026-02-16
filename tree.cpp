@@ -70,17 +70,32 @@ bool Tree::contains(Node* node, int value) const
 
 void Tree::inorder(Node* node) const
 {
-    // no logic yet
+    if (node == nullptr)
+        return;
+
+    inorder(node->left);
+    std::cout << node->data << " ";
+    inorder(node->right);
 }
 
 void Tree::preorder(Node* node) const
 {
-    // no logic yet
+    if (node == nullptr)
+        return;
+
+    std::cout << node->data << " ";
+    preorder(node->left);
+    preorder(node->right);
 }
 
 void Tree::postorder(Node* node) const
 {
-    // no logic yet
+    if (node == nullptr)
+        return;
+
+    postorder(node->left);
+    postorder(node->right);
+    std::cout << node->data << " ";
 }
 
 void Tree::clear(Node* node)
@@ -96,8 +111,15 @@ void Tree::clear(Node* node)
 
 Tree::Node* Tree::copy(Node* node)
 {
-    // no logic yet
-    return nullptr;
+    if (node == nullptr)
+        return nullptr;
+
+    Node* newNode = new Node(node->data);
+
+    newNode->left = copy(node->left);
+    newNode->right = copy(node->right);
+
+    return newNode;
 }
 
 // Public Non Recursive Operations
