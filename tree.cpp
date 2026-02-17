@@ -46,26 +46,93 @@ Tree::~Tree()
 // Private Recursive Helpers
 Tree::Node* Tree::insert(Node* node, int value)
 {
-    // no logic yet
+    if (node == nullptr)
+    {
+        return new Node(value);
+    }
+
+    if (value < node->data)
+    {
+        node->left = insert(node->left, value);
+    }
+    else if (value > node->data)
+    {
+        node->right = insert(node->right, value);
+    }
+    // else duplicate: do nothing
+
     return node;
 }
 
 Tree::Node* Tree::remove(Node* node, int value)
 {
-    // no logic yet
+    if (node == nullptr)
+        return nullptr;
+
+    if (value < node->data)
+    {
+        node->left = remove(node->left, value);
+    }
+    else if (value > node->data)
+    {
+        node->right = remove(node->right, value);
+    }
+    else
+    {
+        // Found node to remove
+
+        // Case 1: no left child
+        if (node->left == nullptr)
+        {
+            Node* rightChild = node->right;
+            delete node;
+            return rightChild;
+        }
+
+        // Case 2: no right child
+        if (node->right == nullptr)
+        {
+            Node* leftChild = node->left;
+            delete node;
+            return leftChild;
+        }
+
+        // Case 3: two children
+        // Replace with inorder successor (min of right subtree)
+        Node* successor = findMin(node->right);
+        node->data = successor->data;
+
+        // Remove successor from right subtree
+        node->right = remove(node->right, successor->data);
+    }
+
     return node;
 }
 
 Tree::Node* Tree::findMin(Node* node) const
 {
-    // no logic yet
-    return nullptr;
+    if (node == nullptr)
+        return nullptr;
+
+    while (node->left != nullptr)
+    {
+        node = node->left;
+    }
+    return node;
 }
 
 bool Tree::contains(Node* node, int value) const
 {
-    // no logic yet
-    return false;
+    if (node == nullptr)
+        return false;
+
+    if (value == node->data)
+        return true;
+
+    if (value < node->data)
+        return contains(node->left, value);
+
+    return contains(node->right, value);
 }
 
 void Tree::inorder(Node* node) const
@@ -125,20 +192,28 @@ Tree::Node* Tree::copy(Node* node)
 // Public Non Recursive Operations
 bool Tree::Insert(int value)
 {
-    // no logic yet
-    return false;
+    // reject duplicates
+    if (Contains(value))
+        return false;
+
+    root = insert(root, value);
+    ++size;
+    return true;
 }
 
 bool Tree::Remove(int value)
 {
-    // no logic yet
-    return false;
+    if (!Contains(value))
+        return false;
+
+    root = remove(root, value);
+    --size;
+    return true;
 }
 
 bool Tree::Contains(int value) const
 {
-    // no logic yet
-    return false;
+    return contains(root, value);
 }
 
 // Printing
