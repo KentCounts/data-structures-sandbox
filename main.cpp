@@ -1,6 +1,7 @@
 #include <iostream>
 #include "linked_list.h"
 #include "stack_queue.h"
+#include "tree.h"
 
 void show_main_menu()
 {
@@ -64,6 +65,25 @@ void show_queue_menu()
     std::cout << "0. Back\n";
     std::cout << "Choice: ";
 }
+
+void show_tree_menu()
+{
+    std::cout << "\n--- Tree Menu ---\n";
+    std::cout << "1. Initialize tree\n";
+    std::cout << "2. Print In-Order\n";
+    std::cout << "3. Print Pre-Order\n";
+    std::cout << "4. Print Post-Order\n";
+    std::cout << "5. Print Level-Order\n";
+    std::cout << "6. Is tree empty?\n";
+    std::cout << "7. Get tree size\n";
+    std::cout << "8. Clear tree\n";
+    std::cout << "9. Insert value\n";
+    std::cout << "10. Remove value\n";
+    std::cout << "11. Contains value?\n";
+    std::cout << "0. Main Menu\n";
+    std::cout << "Choice: ";
+}
+
 
 bool linked_list_menu(LinkedList& list)
 {
@@ -430,11 +450,106 @@ bool queue_menu(Queue& queue)
     }
 }
 
+bool tree_menu(Tree& tree)
+{
+    int choice = -1;
+
+    while (true)
+    {
+        show_tree_menu();
+        std::cin >> choice;
+
+        switch (choice)
+        {
+        case 1:
+            tree.InitSample();
+            std::cout << "Tree initialized with sample data.\n";
+            break;
+
+        case 2:
+            tree.PrintInOrder();
+            break;
+
+        case 3:
+            tree.PrintPreOrder();
+            break;
+
+        case 4:
+            tree.PrintPostOrder();
+            break;
+
+        case 5:
+            tree.PrintLevelOrder();
+            break;
+
+        case 6:
+            std::cout << (tree.IsEmpty() ? "Tree is empty.\n" : "Tree is NOT empty.\n");
+            break;
+
+        case 7:
+            std::cout << "Tree size: " << tree.GetSize() << "\n";
+            break;
+
+        case 8:
+            tree.Clear();
+            std::cout << "Tree cleared.\n";
+            break;
+
+        case 9:
+        {
+            int value;
+            std::cout << "Enter value to insert: ";
+            std::cin >> value;
+
+            if (tree.Insert(value))
+                std::cout << "Inserted.\n";
+            else
+                std::cout << "Value already exists (duplicate rejected).\n";
+
+            break;
+        }
+
+        case 10:
+        {
+            int value;
+            std::cout << "Enter value to remove: ";
+            std::cin >> value;
+
+            if (tree.Remove(value))
+                std::cout << "Removed.\n";
+            else
+                std::cout << "Value not found.\n";
+
+            break;
+        }
+
+        case 11:
+        {
+            int value;
+            std::cout << "Enter value to search for: ";
+            std::cin >> value;
+
+            std::cout << (tree.Contains(value) ? "Found.\n" : "Not found.\n");
+            break;
+        }
+
+        case 0:
+            return true;
+
+        default:
+            std::cout << "Invalid choice.\n";
+            break;
+        }
+    }
+}
+
+
 int main()
 {
     LinkedList list;
     Stack stack;
     Queue queue;
+    Tree tree;
     int choice = -1;
     bool running = true;
 
@@ -462,6 +577,8 @@ int main()
         case 5:
 
         case 6:
+            running = tree_menu(tree);
+            break;
 
         case 7:
             std::cout << "Feature not implemented yet.\n";
