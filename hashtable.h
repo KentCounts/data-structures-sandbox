@@ -1,35 +1,55 @@
 #pragma once
 
-// node struct
-// key
-// value
+#include <cstddef>
 
-// node table
-// capacity
-// size
+class HashTable
+{
+private:
 
-// hashing
+    struct Node
+    {
+        int key;
+        int value;
+        Node* next;
 
-// find node
-// clear bucket
-// copy bucket
-// resize
-// rehash
+        Node(int k, int v);
+    };
 
+    Node** table;
+    std::size_t capacity;
+    std::size_t size;
 
-// constructors and destructors (rule of 3 maybe)
+    std::size_t hash(int key) const;
 
-// insert
-// remove
-// contains
-// get
+    Node* findNode(int key) const;
+    Node* findNodeInBucket(std::size_t idx, int key) const;
 
-// is empty
-// get size
-// get capacity
-// load factor
+    void clearBucket(Node* head);
+    Node* copyBucket(Node* head);
 
-// clear
-// init sample
-// print all
-// print bucket
+    void resizeIfNeeded();
+    void rehash(std::size_t newCapacity);
+
+public:
+
+    explicit HashTable(std::size_t initialCapacity = 11);
+    HashTable(const HashTable& other);
+    HashTable& operator=(const HashTable& other);
+    ~HashTable();
+
+    bool Insert(int key, int value);
+    bool Remove(int key);
+    bool Contains(int key) const;
+    bool Get(int key, int& outValue) const;
+
+    bool IsEmpty() const;
+    std::size_t GetSize() const;
+    std::size_t GetCapacity() const;
+    double LoadFactor() const;
+
+    void Clear();
+    void InitSample();
+
+    void Print() const;
+    void PrintBucket(std::size_t index) const;
+};
