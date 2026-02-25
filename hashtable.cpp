@@ -101,3 +101,87 @@ void HashTable::rehash(std::size_t newCapacity)
 
     delete[] oldTable;
 }
+
+HashTable::Node::Node(int k, int v)
+    : key(k), value(v), next(nullptr)
+{
+}
+
+HashTable::HashTable(std::size_t initialCapacity)
+    : table(nullptr), capacity(initialCapacity), size(0)
+{
+    if (capacity < 1)
+        capacity = 1;
+
+    table = new Node * [capacity];
+    for (std::size_t i = 0; i < capacity; ++i)
+        table[i] = nullptr;
+}
+
+HashTable::HashTable(const HashTable& other)
+    : table(nullptr), capacity(other.capacity), size(other.size)
+{
+    if (capacity < 1)
+        capacity = 1;
+
+    table = new Node * [capacity];
+    for (std::size_t i = 0; i < capacity; ++i)
+        table[i] = nullptr;
+
+    for (std::size_t i = 0; i < capacity; ++i)
+    {
+        table[i] = copyBucket(other.table[i]);
+    }
+}
+
+HashTable& HashTable::operator=(const HashTable& other)
+{
+    if (this == &other)
+        return *this;
+
+    if (table != nullptr)
+    {
+        for (std::size_t i = 0; i < capacity; ++i)
+        {
+            clearBucket(table[i]);
+            table[i] = nullptr;
+        }
+        delete[] table;
+        table = nullptr;
+    }
+
+    capacity = other.capacity;
+    size = other.size;
+
+    if (capacity < 1)
+        capacity = 1;
+
+    table = new Node * [capacity];
+    for (std::size_t i = 0; i < capacity; ++i)
+        table[i] = nullptr;
+
+    for (std::size_t i = 0; i < capacity; ++i)
+    {
+        table[i] = copyBucket(other.table[i]);
+    }
+
+    return *this;
+}
+
+HashTable::~HashTable()
+{
+    if (table != nullptr)
+    {
+        for (std::size_t i = 0; i < capacity; ++i)
+        {
+            clearBucket(table[i]);
+            table[i] = nullptr;
+        }
+
+        delete[] table;
+        table = nullptr;
+    }
+
+    capacity = 0;
+    size = 0;
+}
