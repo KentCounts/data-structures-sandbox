@@ -185,3 +185,67 @@ HashTable::~HashTable()
     capacity = 0;
     size = 0;
 }
+
+bool HashTable::Insert(int key, int value)
+{
+    if (findNode(key) != nullptr)
+        return false;
+
+    std::size_t idx = hash(key);
+
+    Node* n = new Node(key, value);
+    n->next = table[idx];
+    table[idx] = n;
+
+    ++size;
+    resizeIfNeeded();
+    return true;
+}
+
+bool HashTable::Remove(int key)
+{
+    std::size_t idx = hash(key);
+
+    Node* current = table[idx];
+    Node* prev = nullptr;
+
+    while (current != nullptr)
+    {
+        if (current->key == key)
+        {
+            if (prev == nullptr)
+            {
+                // removing head
+                table[idx] = current->next;
+            }
+            else
+            {
+                prev->next = current->next;
+            }
+
+            delete current;
+            --size;
+            return true;
+        }
+
+        prev = current;
+        current = current->next;
+    }
+
+    return false;
+}
+
+bool HashTable::Contains(int key) const
+{
+    return findNode(key) != nullptr;
+}
+
+bool HashTable::Get(int key, int& outValue) const
+{
+    Node* n = findNode(key);
+    if (n == nullptr)
+        return false;
+
+    outValue = n->value;
+    return true;
+}
