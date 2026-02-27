@@ -249,3 +249,26 @@ bool HashTable::Get(int key, int& outValue) const
     outValue = n->value;
     return true;
 }
+
+bool HashTable::IsEmpty() const
+{
+    return size == 0;
+}
+
+std::size_t HashTable::GetSize() const
+{
+    return size;
+}
+
+std::size_t HashTable::GetCapacity() const
+{
+    return capacity;
+}
+
+double HashTable::LoadFactor() const
+{
+    if (capacity == 0)
+        return 0.0;
+
+    return static_cast<double>(size) / static_cast<double>(capacity);
+}
