@@ -1,4 +1,5 @@
 #include "hashtable.h"
+#include <iostream>
 
 std::size_t HashTable::hash(int key) const
 {
@@ -271,4 +272,64 @@ double HashTable::LoadFactor() const
         return 0.0;
 
     return static_cast<double>(size) / static_cast<double>(capacity);
+}
+
+void HashTable::Clear()
+{
+    if (table == nullptr)
+        return;
+
+    for (std::size_t i = 0; i < capacity; ++i)
+    {
+        clearBucket(table[i]);
+        table[i] = nullptr;
+    }
+
+    size = 0;
+}
+
+// purposefully colides at certain capacity for testing
+void HashTable::InitSample()
+{
+    Clear();
+
+    Insert(10, 100);
+    Insert(21, 210);
+    Insert(32, 320);
+    Insert(43, 430);
+    Insert(54, 540);
+}
+
+void HashTable::Print() const
+{
+    for (std::size_t i = 0; i < capacity; ++i)
+    {
+        std::cout << "[" << i << "] ";
+        PrintBucket(i);
+    }
+}
+
+void HashTable::PrintBucket(std::size_t index) const
+{
+    if (index >= capacity)
+    {
+        std::cout << "(invalid index)\n";
+        return;
+    }
+
+    Node* current = table[index];
+
+    if (current == nullptr)
+    {
+        std::cout << "(empty)\n";
+        return;
+    }
+
+    while (current != nullptr)
+    {
+        std::cout << "(" << current->key << ":" << current->value << ") -> ";
+        current = current->next;
+    }
+
+    std::cout << "nullptr\n";
 }
