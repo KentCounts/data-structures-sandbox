@@ -2,6 +2,7 @@
 #include "linked_list.h"
 #include "stack_queue.h"
 #include "tree.h"
+#include "hashtable.h"
 
 void show_main_menu()
 {
@@ -83,6 +84,26 @@ void show_tree_menu()
     std::cout << "0. Main Menu\n";
     std::cout << "Choice: ";
 }
+
+void show_hash_menu()
+{
+    std::cout << "\n--- Hash Table Menu ---\n";
+    std::cout << "1. Initialize hash table\n";
+    std::cout << "2. Print hash table\n";
+    std::cout << "3. Print bucket\n";
+    std::cout << "4. Is hash table empty?\n";
+    std::cout << "5. Clear hash table\n";
+    std::cout << "6. Insert (key, value)\n";
+    std::cout << "7. Remove (key)\n";
+    std::cout << "8. Contains (key)\n";
+    std::cout << "9. Get (key)\n";
+    std::cout << "10. Get size\n";
+    std::cout << "11. Get capacity\n";
+    std::cout << "12. Load factor\n";
+    std::cout << "0. Main Menu\n";
+    std::cout << "Choice: ";
+}
+
 
 
 bool linked_list_menu(LinkedList& list)
@@ -543,6 +564,119 @@ bool tree_menu(Tree& tree)
     }
 }
 
+bool hash_table_menu(HashTable& ht)
+{
+    int choice = -1;
+
+    while (true)
+    {
+        show_hash_menu();
+        std::cin >> choice;
+
+        switch (choice)
+        {
+        case 1:
+            ht.InitSample();
+            std::cout << "Hash table initialized with sample data.\n";
+            break;
+
+        case 2:
+            ht.Print();
+            break;
+
+        case 3:
+        {
+            std::size_t idx;
+            std::cout << "Enter bucket index (0 to " << (ht.GetCapacity() - 1) << "): ";
+            std::cin >> idx;
+            ht.PrintBucket(idx);
+            break;
+        }
+
+        case 4:
+            std::cout << (ht.IsEmpty() ? "Hash table is empty.\n" : "Hash table is NOT empty.\n");
+            break;
+
+        case 5:
+            ht.Clear();
+            std::cout << "Hash table cleared.\n";
+            break;
+
+        case 6:
+        {
+            int key, value;
+            std::cout << "Enter key: ";
+            std::cin >> key;
+            std::cout << "Enter value: ";
+            std::cin >> value;
+
+            if (ht.Insert(key, value))
+                std::cout << "Inserted.\n";
+            else
+                std::cout << "Insert failed (key already exists).\n";
+            break;
+        }
+
+        case 7:
+        {
+            int key;
+            std::cout << "Enter key to remove: ";
+            std::cin >> key;
+
+            if (ht.Remove(key))
+                std::cout << "Removed.\n";
+            else
+                std::cout << "Key not found.\n";
+            break;
+        }
+
+        case 8:
+        {
+            int key;
+            std::cout << "Enter key to check: ";
+            std::cin >> key;
+
+            std::cout << (ht.Contains(key) ? "Found.\n" : "Not found.\n");
+            break;
+        }
+
+        case 9:
+        {
+            int key;
+            std::cout << "Enter key to get value for: ";
+            std::cin >> key;
+
+            int outValue = 0;
+            if (ht.Get(key, outValue))
+                std::cout << "Value: " << outValue << "\n";
+            else
+                std::cout << "Key not found.\n";
+
+            break;
+        }
+
+        case 10:
+            std::cout << "Size: " << ht.GetSize() << "\n";
+            break;
+
+        case 11:
+            std::cout << "Capacity: " << ht.GetCapacity() << "\n";
+            break;
+
+        case 12:
+            std::cout << "Load factor: " << ht.LoadFactor() << "\n";
+            break;
+
+        case 0:
+            return true;
+
+        default:
+            std::cout << "Invalid choice.\n";
+            break;
+        }
+    }
+}
+
 
 int main()
 {
@@ -552,6 +686,7 @@ int main()
     Tree tree;
     int choice = -1;
     bool running = true;
+    HashTable ht;
 
     while (running)
     {
@@ -575,6 +710,8 @@ int main()
         case 4:
 
         case 5:
+            running = hash_table_menu(ht);
+            break;
 
         case 6:
             running = tree_menu(tree);
