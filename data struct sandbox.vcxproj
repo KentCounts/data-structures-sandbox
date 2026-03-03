@@ -132,6 +132,7 @@
     <ClInclude Include="tree.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="binary_search.cpp" />
     <ClCompile Include="hashtable.cpp" />
     <ClCompile Include="linked_list.cpp" />
     <ClCompile Include="main.cpp" />
