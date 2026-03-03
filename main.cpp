@@ -4,8 +4,6 @@
 #include "tree.h"
 #include "hashtable.h"
 
-// changed code
-
 void show_main_menu()
 {
     std::cout << "\n=== Main Menu ===\n";
