@@ -1,14 +1,23 @@
 #pragma once
 
-// requires input to be sorted
+#include <cstddef>
+class BinarySearch
+{
+private:
 
-// recursive search
+    static int recursiveSearch(const int arr[], int left, int right, int target);
 
-// basic binary iterative search
+public:
 
+    static bool IsSorted(const int arr[], std::size_t size);
 
-// duplicate aware search?
+    static int Search(const int arr[], std::size_t size, int target);
 
-// lower + upper bounds
+    static int SearchRecursive(const int arr[], std::size_t size, int target);
 
-// check that input is sorted before begin
+    static int FirstOccurrence(const int arr[], std::size_t size, int target);
+    static int LastOccurrence(const int arr[], std::size_t size, int target);
+
+    static int LowerBound(const int arr[], std::size_t size, int target);
+    static int UpperBound(const int arr[], std::size_t size, int target);
+};
