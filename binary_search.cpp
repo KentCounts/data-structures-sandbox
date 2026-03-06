@@ -56,3 +56,66 @@ int BinarySearch::SearchRecursive(const int arr[], std::size_t size, int target)
 
     return recursiveSearch(arr, 0, static_cast<int>(size) - 1, target);
 }
+
+
+int BinarySearch::FirstOccurrence(const int arr[], std::size_t size, int target)
+{
+    if (size == 0) return -1;
+    if (!IsSorted(arr, size)) return -1;
+
+    int left = 0;
+    int right = static_cast<int>(size) - 1;
+    int result = -1;
+
+    while (left <= right)
+    {
+        const int mid = left + (right - left) / 2;
+
+        if (arr[mid] == target)
+        {
+            result = mid;
+            right = mid - 1;
+        }
+        else if (target < arr[mid])
+        {
+            right = mid - 1;
+        }
+        else
+        {
+            left = mid + 1;
+        }
+    }
+
+    return result;
+}
+
+int BinarySearch::LastOccurrence(const int arr[], std::size_t size, int target)
+{
+    if (size == 0) return -1;
+    if (!IsSorted(arr, size)) return -1;
+
+    int left = 0;
+    int right = static_cast<int>(size) - 1;
+    int result = -1;
+
+    while (left <= right)
+    {
+        const int mid = left + (right - left) / 2;
+
+        if (arr[mid] == target)
+        {
+            result = mid;
+            left = mid + 1;
+        }
+        else if (target < arr[mid])
+        {
+            right = mid - 1;
+        }
+        else
+        {
+            left = mid + 1;
+        }
+    }
+
+    return result;
+}
