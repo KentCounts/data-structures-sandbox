@@ -119,3 +119,47 @@ int BinarySearch::LastOccurrence(const int arr[], std::size_t size, int target)
 
     return result;
 }
+
+int BinarySearch::LowerBound(const int arr[], std::size_t size, int target)
+{
+    int left = 0;
+    int right = static_cast<int>(size);
+
+    while (left < right)
+    {
+        int mid = left + (right - left) / 2;
+
+        if (arr[mid] < target)
+        {
+            left = mid + 1;
+        }
+        else
+        {
+            right = mid;
+        }
+    }
+
+    return left;
+}
+
+int BinarySearch::UpperBound(const int arr[], std::size_t size, int target)
+{
+    int left = 0;
+    int right = static_cast<int>(size);
+
+    while (left < right)
+    {
+        int mid = left + (right - left) / 2;
+
+        if (arr[mid] <= target)
+        {
+            left = mid + 1;
+        }
+        else
+        {
+            right = mid;
+        }
+    }
+
+    return left;
+}
