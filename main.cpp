@@ -3,6 +3,7 @@
 #include "stack_queue.h"
 #include "tree.h"
 #include "hashtable.h"
+#include "binary_search.h"
 
 void show_main_menu()
 {
@@ -104,6 +105,21 @@ void show_hash_menu()
     std::cout << "Choice: ";
 }
 
+void show_binary_search_menu()
+{
+    std::cout << "\n--- Binary Search Menu ---\n";
+    std::cout << "1. Initialize sample sorted array\n";
+    std::cout << "2. Print array\n";
+    std::cout << "3. Check if array is sorted\n";
+    std::cout << "4. Basic binary search\n";
+    std::cout << "5. Recursive binary search\n";
+    std::cout << "6. First occurrence\n";
+    std::cout << "7. Last occurrence\n";
+    std::cout << "8. Lower bound\n";
+    std::cout << "9. Upper bound\n";
+    std::cout << "0. Main Menu\n";
+    std::cout << "Choice: ";
+}
 
 
 bool linked_list_menu(LinkedList& list)
@@ -677,6 +693,193 @@ bool hash_table_menu(HashTable& ht)
     }
 }
 
+bool binary_search_menu()
+{
+    int choice = -1;
+
+    const std::size_t SIZE = 10;
+    int arr[SIZE] = { 1, 3, 5, 7, 9, 11, 13, 15, 17, 19 };
+    bool initialized = true;
+
+    while (true)
+    {
+        show_binary_search_menu();
+        std::cin >> choice;
+
+        switch (choice)
+        {
+        case 1:
+        {
+            int sample[SIZE] = { 1, 3, 3, 5, 7, 7, 7, 9, 12, 15 };
+            for (std::size_t i = 0; i < SIZE; ++i)
+            {
+                arr[i] = sample[i];
+            }
+            initialized = true;
+            std::cout << "Sample sorted array initialized.\n";
+            break;
+        }
+
+        case 2:
+        {
+            if (!initialized)
+            {
+                std::cout << "Array not initialized.\n";
+                break;
+            }
+
+            std::cout << "Array: ";
+            for (std::size_t i = 0; i < SIZE; ++i)
+            {
+                std::cout << arr[i] << " ";
+            }
+            std::cout << "\n";
+            break;
+        }
+
+        case 3:
+        {
+            if (!initialized)
+            {
+                std::cout << "Array not initialized.\n";
+                break;
+            }
+
+            if (BinarySearch::IsSorted(arr, SIZE))
+                std::cout << "Array is sorted.\n";
+            else
+                std::cout << "Array is NOT sorted.\n";
+            break;
+        }
+
+        case 4:
+        {
+            if (!initialized)
+            {
+                std::cout << "Array not initialized.\n";
+                break;
+            }
+
+            int target;
+            std::cout << "Enter target value: ";
+            std::cin >> target;
+
+            int index = BinarySearch::Search(arr, SIZE, target);
+
+            if (index != -1)
+                std::cout << "Found at index " << index << ".\n";
+            else
+                std::cout << "Value not found.\n";
+            break;
+        }
+
+        case 5:
+        {
+            if (!initialized)
+            {
+                std::cout << "Array not initialized.\n";
+                break;
+            }
+
+            int target;
+            std::cout << "Enter target value: ";
+            std::cin >> target;
+
+            int index = BinarySearch::SearchRecursive(arr, SIZE, target);
+
+            if (index != -1)
+                std::cout << "Found at index " << index << ".\n";
+            else
+                std::cout << "Value not found.\n";
+            break;
+        }
+
+        case 6:
+        {
+            if (!initialized)
+            {
+                std::cout << "Array not initialized.\n";
+                break;
+            }
+
+            int target;
+            std::cout << "Enter target value: ";
+            std::cin >> target;
+
+            int index = BinarySearch::FirstOccurrence(arr, SIZE, target);
+
+            if (index != -1)
+                std::cout << "First occurrence at index " << index << ".\n";
+            else
+                std::cout << "Value not found.\n";
+            break;
+        }
+
+        case 7:
+        {
+            if (!initialized)
+            {
+                std::cout << "Array not initialized.\n";
+                break;
+            }
+
+            int target;
+            std::cout << "Enter target value: ";
+            std::cin >> target;
+
+            int index = BinarySearch::LastOccurrence(arr, SIZE, target);
+
+            if (index != -1)
+                std::cout << "Last occurrence at index " << index << ".\n";
+            else
+                std::cout << "Value not found.\n";
+            break;
+        }
+
+        case 8:
+        {
+            if (!initialized)
+            {
+                std::cout << "Array not initialized.\n";
+                break;
+            }
+
+            int target;
+            std::cout << "Enter target value: ";
+            std::cin >> target;
+
+            int index = BinarySearch::LowerBound(arr, SIZE, target);
+            std::cout << "Lower bound index: " << index << "\n";
+            break;
+        }
+
+        case 9:
+        {
+            if (!initialized)
+            {
+                std::cout << "Array not initialized.\n";
+                break;
+            }
+
+            int target;
+            std::cout << "Enter target value: ";
+            std::cin >> target;
+
+            int index = BinarySearch::UpperBound(arr, SIZE, target);
+            std::cout << "Upper bound index: " << index << "\n";
+            break;
+        }
+
+        case 0:
+            return true;
+
+        default:
+            std::cout << "Invalid choice.\n";
+            break;
+        }
+    }
+}
+
 
 int main()
 {
@@ -708,6 +911,8 @@ int main()
             break;
 
         case 4:
+            running = binary_search_menu();
+            break;
 
         case 5:
             running = hash_table_menu(ht);
