@@ -136,6 +136,7 @@
     <ClCompile Include="hashtable.cpp" />
     <ClCompile Include="linked_list.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="merge_sort.cpp" />
     <ClCompile Include="stack_queue.cpp" />
     <ClCompile Include="tree.cpp" />
   </ItemGroup>

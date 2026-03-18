@@ -1,17 +1,19 @@
 #pragma once
 
+#include <cstddef>
+
 class MergeSort
 {
 private:
 
-	// merge sort (recursive)
+    static void mergeSort(int arr[], int left, int right);
 
-	// merging step
+    // [left..mid] and [mid+1..right]
+    static void merge(int arr[], int left, int mid, int right);
 
 public:
 
-	// entry point / call sort
+    static void Sort(int arr[], std::size_t size);
 
-	// check if array is sorted
-
+    static bool IsSorted(const int arr[], std::size_t size);
 };
