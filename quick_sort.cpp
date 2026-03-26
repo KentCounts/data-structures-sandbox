@@ -26,10 +26,41 @@ bool QuickSort::IsSorted(const int arr[], std::size_t size)
 
 void QuickSort::quickSort(int arr[], int left, int right)
 {
-    // no logic yet
+    if (left >= right)
+        return;
+
+    int pivotIndex = partition(arr, left, right);
+
+    quickSort(arr, left, pivotIndex - 1);
+    quickSort(arr, pivotIndex + 1, right);
 }
 
 int QuickSort::partition(int arr[], int left, int right)
 {
-    // no logic yet
+    int pivot = arr[left];
+
+    int i = left + 1;
+    int j = right;
+
+    while (i <= j)
+    {
+        if (arr[i] <= pivot)
+        {
+            ++i;
+        }
+        else if (arr[j] > pivot)
+        {
+            --j;
+        }
+        else
+        {
+            std::swap(arr[i], arr[j]);
+            ++i;
+            --j;
+        }
+    }
+
+    std::swap(arr[left], arr[j]);
+
+    return j;
 }
