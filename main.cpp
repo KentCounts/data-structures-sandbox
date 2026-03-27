@@ -5,6 +5,7 @@
 #include "hashtable.h"
 #include "binary_search.h"
 #include "merge_sort.h"
+#include "quick_sort.h"
 
 void show_main_menu()
 {
@@ -133,6 +134,16 @@ void show_merge_sort_menu()
     std::cout << "Choice: ";
 }
 
+void show_quick_sort_menu()
+{
+    std::cout << "\n--- Quick Sort Menu ---\n";
+    std::cout << "1. Initialize sample array\n";
+    std::cout << "2. Print array\n";
+    std::cout << "3. Check if sorted\n";
+    std::cout << "4. Sort array\n";
+    std::cout << "0. Main Menu\n";
+    std::cout << "Choice: ";
+}
 
 
 
@@ -980,6 +991,90 @@ bool merge_sort_menu()
     }
 }
 
+bool quick_sort_menu()
+{
+    int choice = -1;
+
+    const std::size_t SIZE = 10;
+    int arr[SIZE] = { 42, 7, 19, 3, 88, 25, 1, 60, 14, 9 };
+    bool initialized = true;
+
+    while (true)
+    {
+        show_quick_sort_menu();
+        std::cin >> choice;
+
+        switch (choice)
+        {
+        case 1:
+        {
+            int sample[SIZE] = { 42, 7, 19, 3, 88, 25, 1, 60, 14, 9 };
+
+            for (std::size_t i = 0; i < SIZE; ++i)
+            {
+                arr[i] = sample[i];
+            }
+
+            initialized = true;
+            std::cout << "Sample array initialized.\n";
+            break;
+        }
+
+        case 2:
+        {
+            if (!initialized)
+            {
+                std::cout << "Array not initialized.\n";
+                break;
+            }
+
+            std::cout << "Array: ";
+            for (std::size_t i = 0; i < SIZE; ++i)
+            {
+                std::cout << arr[i] << " ";
+            }
+            std::cout << "\n";
+            break;
+        }
+
+        case 3:
+        {
+            if (!initialized)
+            {
+                std::cout << "Array not initialized.\n";
+                break;
+            }
+
+            if (QuickSort::IsSorted(arr, SIZE))
+                std::cout << "Array is sorted.\n";
+            else
+                std::cout << "Array is NOT sorted.\n";
+
+            break;
+        }
+
+        case 4:
+        {
+            if (!initialized)
+            {
+                std::cout << "Array not initialized.\n";
+                break;
+            }
+
+            QuickSort::Sort(arr, SIZE);
+            std::cout << "Array sorted with quick sort.\n";
+            break;
+        }
+
+        case 0:
+            return true;
+
+        default:
+            std::cout << "Invalid choice.\n";
+            break;
+        }
+    }
+}
 
 int main()
 {
@@ -1023,7 +1118,7 @@ int main()
             break;
 
         case 7:
-            std::cout << "Feature not implemented yet.\n";
+            running = quick_sort_menu();
             break;
 
         case 8:
